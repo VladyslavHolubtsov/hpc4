@@ -39,11 +39,11 @@ double* y = (double*)malloc(m * sizeof(double));
 if (rank == 0) {
 for (int i = 0; i < m; i++) {
 for (int j = 0; j < n; j++) {
-A[i * n + j] = i + j;
+A[i * n + j] = i + j * j +1;
 }
 }
 for (int i = 0; i < n; i++) {
-x[i] = i;
+x[i] = j+i;
 }
 }
 matrix_vector_multiply(A, x, y, m, n, k, MPI_COMM_WORLD);
@@ -52,7 +52,7 @@ FILE *file = fopen("result.txt", "a");
 if (file == NULL) {
 return 1;
 }
-fprintf(file, "A: \n");
+fprintf(file, "Matrix:");
 for (int i = 0; i < m * n; i++) {
 if(i%n==0){
 fprintf(file, "\n");
@@ -65,7 +65,7 @@ for (int i = 0; i < n; i++) {
 fprintf(file, "%f ", x[i]);
 }
 fprintf(file, "\n");
-fprintf(file, "Результат: \n");
+fprintf(file, "Result: \n");
 for (int i = 0; i < m; i++) {
 fprintf(file, "%f ", y[i]);
 }
