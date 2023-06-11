@@ -31,7 +31,7 @@ int rank, size;
 MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 MPI_Comm_size(MPI_COMM_WORLD, &size);
 int m = 3;
-int n = 6;
+int n = 7;
 int k = n / size;
 double* A = (double*)malloc(m * n * sizeof(double));
 double* x = (double*)malloc(n * sizeof(double));
@@ -43,7 +43,7 @@ A[i * n + j] = i + j * j +1;
 }
 }
 for (int i = 0; i < n; i++) {
-x[i] = j+i;
+x[i] = i+2*i;
 }
 }
 matrix_vector_multiply(A, x, y, m, n, k, MPI_COMM_WORLD);
